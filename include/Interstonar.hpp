@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2026
 ** Intersonar
 ** File description:
-** Intersonar
+** Interstonar
 */
 
-#ifndef INTERSONAR_HPP
-    #define INTERSONAR_HPP
+#ifndef INTERSTONAR_HPP
+    #define INTERSTONAR_HPP
 
 constexpr int SUCCESS = 0;
 constexpr int EPIERROR = 84;

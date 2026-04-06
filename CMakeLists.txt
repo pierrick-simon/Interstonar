@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(Intersonar)
+project(Interstonar)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,8 +15,8 @@ set(HEADERS
     include/
 )
 
-add_executable(intersonar ${MAIN} ${SRCS})
-target_include_directories(intersonar PRIVATE ${HEADERS})
+add_executable(interstonar ${MAIN} ${SRCS})
+target_include_directories(interstonar PRIVATE ${HEADERS})
 
 find_library(CRITERION criterion REQUIRED)
 

@@ -1,11 +1,11 @@
 /*
 ** EPITECH PROJECT, 2026
-** Intersonar
+** Interstonar
 ** File description:
 ** Main
 */
 
-#include "Intersonar.hpp"
+#include "Interstonar.hpp"
 
 int main()
 {
