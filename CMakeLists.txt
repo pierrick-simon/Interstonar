@@ -31,10 +31,6 @@ target_link_libraries(tests_run_bin criterion --coverage)
 
 add_custom_target(tests_run
     COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_BINARY_DIR}/*.gcda
-    COMMAND ${CMAKE_COMMAND} -E rm -f log.bin
-    COMMAND ${CMAKE_COMMAND} -E copy tests/rom.bin .
-    COMMAND ./tests_run_bin
-    COMMAND ${CMAKE_COMMAND} -E rm -f log.bin rom.bin
     DEPENDS tests_run_bin
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
