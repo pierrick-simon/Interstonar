@@ -26,7 +26,7 @@ target_include_directories(interstonar PRIVATE ${HEADERS})
 find_library(CRITERION criterion REQUIRED)
 
 set(SRCS_TESTS
-    tests/tests_base.cpp
+    tests/tests_parsing.cpp
 )
 
 add_executable(tests_run_bin EXCLUDE_FROM_ALL ${SRCS_TESTS} ${SRCS})
@@ -36,6 +36,7 @@ target_link_libraries(tests_run_bin criterion --coverage)
 
 add_custom_target(tests_run
     COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_BINARY_DIR}/*.gcda
+    COMMAND ./tests_run_bin
     DEPENDS tests_run_bin
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
