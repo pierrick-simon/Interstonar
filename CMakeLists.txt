@@ -9,6 +9,7 @@ set(MAIN
 )
 
 set(SRCS
+    src/Parsing.cpp
 )
 
 set(HEADERS

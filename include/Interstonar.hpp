@@ -10,7 +10,7 @@
 
 constexpr int SUCCESS = 0;
 constexpr int EPIERROR = 84;
-constexpr int ERROR = -1;
+constexpr int SKIP = -1;
 
 namespace inter {
 }

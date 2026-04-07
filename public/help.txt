@@ -1,0 +1,23 @@
+USAGE
+    ./interstonar [--global | --local] CONFIG_FILE [-d TIME | --delta=TIME] Px Py Pz Vx Vy Vz
+
+DESCRIPTION
+    --global
+        Launch program in global scene mode. The CONFIG_FILE will describe a scene containing
+        massive spherical moving bodies.
+
+    --local
+        Launch program in local scene mode. The CONFIG_FILE will describe a scene containing
+        massless motionless shapes.
+
+    -d TIME, --delta=TIME
+        . Sets the delta time (in SI base unit) for which every position is updated.
+
+    CONFIG_FILE
+        TOML configuration file describing a scene.
+
+    Pi
+        Initial position coordinates of the rock
+
+    Vi
+        Initial velocity vector of the rock
