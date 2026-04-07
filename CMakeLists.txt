@@ -13,6 +13,7 @@ set(SRCS
 
 set(HEADERS
     include/
+    include/Astre
 )
 
 add_executable(interstonar ${MAIN} ${SRCS})
