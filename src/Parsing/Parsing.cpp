@@ -12,6 +12,7 @@
 #include "InterException.hpp"
 #include "Interstonar.hpp"
 #include "TypeSphere.hpp"
+#include "ParseConfigFile.hpp"
 
 void inter::Parsing::showHelp()
 {
@@ -52,8 +53,12 @@ void inter::Parsing::parseFile()
         throw WrongArgsException();
     std::ifstream file(_args.front());
 
-    if (!file.is_open())
-        throw NoSuchFileException(_args.front());
+    try {
+        ParseConfigFile parse(_args.front(), _mode);
+        _astres = parse.run();
+    } catch (ParsingException &e) {
+        throw e;
+    }
     _args.pop();
 }
 

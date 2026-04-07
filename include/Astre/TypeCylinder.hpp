@@ -14,7 +14,9 @@ namespace inter {
     class TypeCylinder : public AType {
         public:
             TypeCylinder(double radius, int height)
-                : _radius(radius), _height(height) {};
+                : _radius(radius), _height(height), _inf(false) {};
+            TypeCylinder(double radius)
+                : _radius(radius), _inf(true) {};
             ~TypeCylinder() {};
 
             bool isCollide(Vector3D vec) override {return false;}
@@ -22,6 +24,7 @@ namespace inter {
         private:
             double _radius;
             int _height;
+            bool _inf;
     };
 }
 

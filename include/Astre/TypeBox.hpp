@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2026
 ** Interstonar
 ** File description:
-** TypeSphere
+** TypeBox
 */
 
-#ifndef TYPESPHERE_HPP
-    #define TYPESPHERE_HPP
+#ifndef TYPEBOX_HPP
+    #define TYPEBOX_HPP
 
 #include "AType.hpp"
 
 namespace inter {
-    class TypeSphere : public AType {
+    class TypeBox : public AType {
         public:
-            TypeSphere(Vector3D sides) : _sides(sides) {};
-            ~TypeSphere() {};
+            TypeBox(Vector3D sides) : _sides(sides) {};
+            ~TypeBox() {};
 
             bool isCollide(Vector3D vec) override {return false;}
 

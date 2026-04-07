@@ -9,7 +9,10 @@ set(MAIN
 )
 
 set(SRCS
-    src/Parsing.cpp
+    src/Parsing/Parsing.cpp
+    src/Parsing/ParseConfigFile.cpp
+    src/Parsing/ParseConfigFileCommands.cpp
+    src/Parsing/ParseConfigFileTypes.cpp
 )
 
 set(HEADERS

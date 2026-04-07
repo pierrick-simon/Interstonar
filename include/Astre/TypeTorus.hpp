@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2026
 ** Interstonar
 ** File description:
-** TypeSphere
+** TypeTorus
 */
 
-#ifndef TYPESPHERE_HPP
-    #define TYPESPHERE_HPP
+#ifndef TYPETORUS_HPP
+    #define TYPETORUS_HPP
 
 #include "AType.hpp"
 
 namespace inter {
-    class TypeSphere : public AType {
+    class TypeTorus : public AType {
         public:
-            TypeSphere(double innerRadius, double outerRadius)
+            TypeTorus(double innerRadius, double outerRadius)
                 : _innerRadius(innerRadius), _outerRadius(outerRadius) {};
-            ~TypeSphere() {};
+            ~TypeTorus() {};
 
             bool isCollide(Vector3D vec) override {return false;}
 

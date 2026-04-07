@@ -45,6 +45,44 @@ namespace inter {
             NotANumberException(std::string str)
                 : ParsingException(str + ": Not a number.") {};
     };
+
+    class ParseFileException : public ParsingException {
+        public:
+            ParseFileException(
+                std::string str, std::string path, std::size_t line)
+                : ParsingException("Parsing file: " + str + " At " + path
+                    + ":" + std::to_string(line) + ".") {};
+    };
+
+    class ParseFileNotANumberException : public ParseFileException {
+        public:
+            ParseFileNotANumberException(std::string path, std::size_t line)
+                : ParseFileException("Not a number.", path, line) {};
+    };
+
+    class ParseFileNotAVectorException : public ParseFileException {
+        public:
+            ParseFileNotAVectorException(std::string path, std::size_t line)
+                : ParseFileException("Not a Vector3D.", path, line) {};
+    };
+
+    class ParseFileNotAStringException : public ParseFileException {
+        public:
+            ParseFileNotAStringException(std::string path, std::size_t line)
+                : ParseFileException("Not a String.", path, line) {};
+    };
+
+    class ParseFileUnknowTypeException : public ParseFileException {
+        public:
+            ParseFileUnknowTypeException(std::string path, std::size_t line)
+                : ParseFileException("Unknow Type.", path, line) {};
+    };
+
+    class ParseFileWrongArgsException : public ParseFileException {
+        public:
+            ParseFileWrongArgsException(std::string path, std::size_t line)
+                : ParseFileException("Wrong Args.", path, line) {};
+    };
 }
 
 #endif
