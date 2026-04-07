@@ -7,9 +7,11 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include "Parsing.hpp"
 #include "InterException.hpp"
 #include "Interstonar.hpp"
+#include "TypeSphere.hpp"
 
 void inter::Parsing::showHelp()
 {
@@ -30,12 +32,112 @@ bool inter::Parsing::isHelp()
     return value;
 }
 
-std::vector<inter::Astre> inter::Parsing::run()
+void inter::Parsing::parseMode()
 {
-    try {
+    if (_args.empty())
+        throw WrongArgsException();
+    for (auto mode: _availableMode) {
+        if (mode.first == _args.front()) {
+            _mode = mode.second;
+            _args.pop();
+            return;
+        }
+    }
+    throw WrongArgsException();
+}
 
+void inter::Parsing::parseFile()
+{
+    if (_args.empty())
+        throw WrongArgsException();
+    std::ifstream file(_args.front());
+
+    if (!file.is_open())
+        throw NoSuchFileException(_args.front());
+    _args.pop();
+}
+
+void inter::Parsing::parseTime()
+{
+    if (_args.empty())
+        throw WrongArgsException();
+    try {
+        if (_args.front() == SIMPLEDELTAFLAG) {
+            _args.pop();
+            _time = getSizeT(_args.front());
+        } else if (_args.front().starts_with(DELTAFLAG)) {
+            auto tmp = _args.front().substr(DELTAFLAG.size());
+            _time = getSizeT(tmp);
+        } else 
+            throw WrongArgsException();
     } catch (ParsingException &e) {
         throw e;
     }
-    return _astres;
+    _args.pop();
 }
+
+void inter::Parsing::parseStone()
+{
+    TypeSphere shere(DEFAULTRADIUS);
+    _stone.setName("Stone");
+    _stone.setMass(DEFAULTMASS);
+    _stone.setType(shere);
+    try {
+        _stone.setPos({
+            parseDouble(),
+            parseDouble(),
+            parseDouble()
+        });
+        _stone.setVelocity({
+            parseDouble(),
+            parseDouble(),
+            parseDouble()
+        });
+    } catch (ParsingException &e) {
+        throw e;
+    }
+}
+
+double inter::Parsing::parseDouble()
+{
+    if (_args.empty())
+        throw WrongArgsException();
+    std::istringstream tmp(_args.front());
+    double nb;
+    tmp >> nb;
+    if (tmp.fail())
+        throw NotANumberException(_args.front());
+    _args.pop();
+    return nb;
+}
+
+std::size_t inter::Parsing::getSizeT(std::string str)
+{
+    std::istringstream tmp(str);
+    std::size_t nb;
+    tmp >> nb;
+    if (tmp.fail())
+        throw NotANumberException(str);
+    return nb;
+}
+
+void inter::Parsing::run()
+{
+    try {
+        parseMode();
+        parseFile();
+        if (_mode == Mode::GLobal)
+            parseTime();
+        parseStone();
+        if (!_args.empty())
+            throw WrongArgsException();
+    } catch (ParsingException &e) {
+        throw e;
+    }
+}
+
+const std::unordered_map<std::string, inter::Mode>
+    inter::Parsing::_availableMode = {
+    {"--global", Mode::GLobal},
+    {"--local", Mode::Local},
+};

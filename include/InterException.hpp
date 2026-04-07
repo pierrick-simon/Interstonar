@@ -23,8 +23,27 @@ namespace inter {
     };
 
     class ParsingException : public InterException {
-        ParsingException(std::string str)
-            : InterException("Parsing: " + str) {}
+        public:
+            ParsingException(std::string str)
+                : InterException("Parsing: " + str) {}
+    };
+
+    class WrongArgsException : public ParsingException {
+        public:
+            WrongArgsException()
+                : ParsingException("Wrongs Args. Use ./interstonar --help") {};
+    };
+
+    class NoSuchFileException : public ParsingException {
+        public:
+            NoSuchFileException(std::string str)
+                : ParsingException(str + ": No Such File.") {};
+    };
+
+    class NotANumberException : public ParsingException {
+        public:
+            NotANumberException(std::string str)
+                : ParsingException(str + ": Not a number.") {};
     };
 }
 
