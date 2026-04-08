@@ -12,20 +12,20 @@
 #include "TypeBox.hpp"
 #include "TypeTorus.hpp"
 
-inter::AType inter::ParseConfigFile::shpere()
+std::unique_ptr<inter::IType> inter::ParseConfigFile::shpere()
 {
     try {
         std::string line;
         if (!customGetline(line) || !line.starts_with(SPHEREARGONE))
             throw ParseFileWrongArgsException(_filePath, _line);
         TypeSphere sphere(parseDouble(line));
-        return sphere;
+        return std::make_unique<TypeSphere>(sphere);
     } catch (ParseFileException &e) {
         throw e;
     }
 }
 
-inter::AType inter::ParseConfigFile::cylinder()
+std::unique_ptr<inter::IType> inter::ParseConfigFile::cylinder()
 {
     try {
         std::string line;
@@ -39,26 +39,26 @@ inter::AType inter::ParseConfigFile::cylinder()
             cylinder = TypeCylinder(radius, parseDouble(line));
         else
             throw ParseFileWrongArgsException(_filePath, _line);
-        return cylinder;
+        return std::make_unique<TypeCylinder>(cylinder);
     } catch (ParseFileException &e) {
         throw e;
     }
 }
 
-inter::AType inter::ParseConfigFile::box()
+std::unique_ptr<inter::IType> inter::ParseConfigFile::box()
 {
     try {
         std::string line;
         if (!customGetline(line) || !line.starts_with(BOXARGONE))
             throw ParseFileWrongArgsException(_filePath, _line);
         TypeBox box(parseVec(line));
-        return box;
+        return std::make_unique<TypeBox>(box);
     } catch (ParseFileException &e) {
         throw e;
     }
 }
 
-inter::AType inter::ParseConfigFile::torus()
+std::unique_ptr<inter::IType> inter::ParseConfigFile::torus()
 {
     try {
         std::string line;
@@ -68,7 +68,7 @@ inter::AType inter::ParseConfigFile::torus()
         if (!customGetline(line) || !line.starts_with(TORUSARGTWO))
             throw ParseFileWrongArgsException(_filePath, _line);
         TypeTorus torus(innerRadius, parseDouble(line));
-        return torus;
+        return std::make_unique<TypeTorus>(torus);
     } catch (ParseFileException &e) {
         throw e;
     }

@@ -29,21 +29,23 @@ namespace inter {
 
     class ParseConfigFile {
         public:
-            ParseConfigFile(std::string file, Mode mode);
+            ParseConfigFile(std::string file, Mode mode,
+                std::reference_wrapper<std::vector<Astre>>);
             ~ParseConfigFile() {};
 
-            std::vector<Astre> run();
+            void run();
 
         private:
             static const Order _globalCommands;
             static const Order _localCommands;
-            std::unordered_map<std::string, std::function<AType()>> _types;
+            std::unordered_map<std::string,
+                std::function<std::unique_ptr<IType>()>> _types;
             Commands _commands;
             std::string _filePath;
             std::ifstream _file;
             Mode _mode;
             std::size_t _line = 0;
-            std::vector<Astre> _astres;
+            std::reference_wrapper<std::vector<Astre>> _astres;
 
             void removeComment(
                 std::reference_wrapper<std::string> str);
@@ -66,10 +68,10 @@ namespace inter {
             void radius(std::string line, std::reference_wrapper<Astre> astre);
             void type(std::string line, std::reference_wrapper<Astre> astre);
 
-            AType shpere();
-            AType cylinder();
-            AType box();
-            AType torus();
+            std::unique_ptr<IType> shpere();
+            std::unique_ptr<IType> cylinder();
+            std::unique_ptr<IType> box();
+            std::unique_ptr<IType> torus();
     };
 }
 

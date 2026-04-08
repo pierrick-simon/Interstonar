@@ -10,18 +10,18 @@
 #include "ParseConfigFile.hpp"
 #include "InterException.hpp"
 
-inter::ParseConfigFile::ParseConfigFile(std::string file, Mode mode)
-    : _filePath(file), _file(file), _mode(mode)
+inter::ParseConfigFile::ParseConfigFile(std::string file, Mode mode, std::reference_wrapper<std::vector<Astre>> astres)
+    : _filePath(file), _file(file), _mode(mode), _astres(astres)
 {
     if (!file.ends_with(".toml"))
         throw WrongExtensionException(file);
     if (!_file.is_open())
         throw NoSuchFileException(file);
 
-    _types["sphere"] = [this]() -> AType {return shpere();};
-    _types["cylinder"] = [this]() -> AType {return cylinder();};
-    _types["box"] = [this]() -> AType {return box();};
-    _types["torus"] = [this]() -> AType {return torus();};
+    _types["sphere"] = [this]() -> std::unique_ptr<IType> {return shpere();};
+    _types["cylinder"] = [this]() -> std::unique_ptr<IType> {return cylinder();};
+    _types["box"] = [this]() -> std::unique_ptr<IType> {return box();};
+    _types["torus"] = [this]() -> std::unique_ptr<IType> {return torus();};
 
     _commands["name"] = [this](std::string line,
         std::reference_wrapper<Astre> astre) {name(line, astre);};
@@ -137,7 +137,7 @@ bool inter::ParseConfigFile::startWriting(std::reference_wrapper<Astre> astre,
 
     if (!writing.get()) {
         if (line.starts_with("[[body]]")) {
-            astre.get() = Astre();
+            astre.get().reset();
             writing.get() = true;
             value = true;
         } else
@@ -165,7 +165,7 @@ void inter::ParseConfigFile::checkCommand(Order order, std::string line)
             skip = true;
         }
         if (!skip && iter == order.end()) {
-            _astres.push_back(astre);
+            _astres.get().push_back(std::move(astre));
             writing = false;
             iter = order.begin();
         }
@@ -175,7 +175,7 @@ void inter::ParseConfigFile::checkCommand(Order order, std::string line)
     
 }
 
-std::vector<inter::Astre> inter::ParseConfigFile::run()
+void inter::ParseConfigFile::run()
 {
     auto order = _globalCommands;
     if (_mode == Mode::Local)
@@ -187,5 +187,4 @@ std::vector<inter::Astre> inter::ParseConfigFile::run()
     } catch (ParseFileException &e) {
         throw e;
     }
-    return _astres;
 }

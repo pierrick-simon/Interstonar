@@ -13,6 +13,13 @@ set(SRCS
     src/Parsing/ParseConfigFile.cpp
     src/Parsing/ParseConfigFileCommands.cpp
     src/Parsing/ParseConfigFileTypes.cpp
+    src/Astre/Astre.cpp
+    src/Astre/TypeBox.cpp
+    src/Astre/TypeCylinder.cpp
+    src/Astre/TypeSphere.cpp
+    src/Astre/TypeTorus.cpp
+    src/Interstonar.cpp
+    src/Vector3D.cpp
 )
 
 set(HEADERS

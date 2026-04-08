@@ -54,7 +54,7 @@ void inter::ParseConfigFile::radius(
 {
     try {
         TypeSphere sphere(parseDouble(line));
-        astre.get().setType(sphere);
+        astre.get().setType(std::make_unique<TypeSphere>(sphere));
     } catch (ParseFileException &e) {
         throw e;
     }

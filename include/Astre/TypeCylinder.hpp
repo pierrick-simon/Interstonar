@@ -8,22 +8,23 @@
 #ifndef TYPECYLINDER_HPP
     #define TYPECYLINDER_HPP
 
-#include "AType.hpp"
+#include "IType.hpp"
 
 namespace inter {
-    class TypeCylinder : public AType {
+    class TypeCylinder : public IType {
         public:
-            TypeCylinder(double radius, int height)
+            TypeCylinder(double radius, double height)
                 : _radius(radius), _height(height), _inf(false) {};
             TypeCylinder(double radius)
                 : _radius(radius), _inf(true) {};
             ~TypeCylinder() {};
 
             bool isCollide(Vector3D vec) override {return false;}
+            void print() override;
 
         private:
             double _radius;
-            int _height;
+            double _height;
             bool _inf;
     };
 }

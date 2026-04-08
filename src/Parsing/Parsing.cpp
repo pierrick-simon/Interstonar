@@ -54,8 +54,8 @@ void inter::Parsing::parseFile()
     std::ifstream file(_args.front());
 
     try {
-        ParseConfigFile parse(_args.front(), _mode);
-        _astres = parse.run();
+        ParseConfigFile parse(_args.front(), _mode, _astres);
+        parse.run();
     } catch (ParsingException &e) {
         throw e;
     }
@@ -81,19 +81,19 @@ void inter::Parsing::parseTime()
     _args.pop();
 }
 
-void inter::Parsing::parseStone()
+void inter::Parsing::parserock()
 {
     TypeSphere shere(DEFAULTRADIUS);
-    _stone.setName("Stone");
-    _stone.setMass(DEFAULTMASS);
-    _stone.setType(shere);
+    _rock.get().setName("rock");
+    _rock.get().setMass(DEFAULTMASS);
+    _rock.get().setType(std::make_unique<TypeSphere>(shere));
     try {
-        _stone.setPos({
+        _rock.get().setPos({
             parseDouble(),
             parseDouble(),
             parseDouble()
         });
-        _stone.setVelocity({
+        _rock.get().setVelocity({
             parseDouble(),
             parseDouble(),
             parseDouble()
@@ -131,9 +131,9 @@ void inter::Parsing::run()
     try {
         parseMode();
         parseFile();
-        if (_mode == Mode::GLobal)
+        if (_mode == Mode::Global)
             parseTime();
-        parseStone();
+        parserock();
         if (!_args.empty())
             throw WrongArgsException();
     } catch (ParsingException &e) {
@@ -143,6 +143,6 @@ void inter::Parsing::run()
 
 const std::unordered_map<std::string, inter::Mode>
     inter::Parsing::_availableMode = {
-    {"--global", Mode::GLobal},
+    {"--global", Mode::Global},
     {"--local", Mode::Local},
 };

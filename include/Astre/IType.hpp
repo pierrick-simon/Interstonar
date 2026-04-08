@@ -8,6 +8,7 @@
 #ifndef ITYPE_HPP
     #define ITYPE_HPP
 
+#include <memory>
 #include "Vector3D.hpp"
 
 namespace inter {
@@ -19,11 +20,12 @@ namespace inter {
         Torus,
     };
 
-    class AType {
+    class IType {
         public:
-            ~AType() = default;
+            ~IType() = default;
 
-            virtual bool isCollide(Vector3D) {return false;}
+            virtual bool isCollide(Vector3D) = 0;
+            virtual void print() = 0;
     };
 }
 

@@ -18,6 +18,11 @@ namespace inter {
             double _x;
             double _y;
             double _z;
+
+            void printVector();
+            void printVector(std::size_t precision, std::string sep);
+            void printVector(std::size_t precision, std::string sep,
+                std::string local);
     };
 }
 

@@ -8,15 +8,16 @@
 #ifndef TYPEBOX_HPP
     #define TYPEBOX_HPP
 
-#include "AType.hpp"
+#include "IType.hpp"
 
 namespace inter {
-    class TypeBox : public AType {
+    class TypeBox : public IType {
         public:
             TypeBox(Vector3D sides) : _sides(sides) {};
             ~TypeBox() {};
 
             bool isCollide(Vector3D vec) override {return false;}
+            void print() override;
 
         private:
             Vector3D _sides;
