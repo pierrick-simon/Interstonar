@@ -25,7 +25,9 @@ static void redirect_all_std()
 static const char *test_main(std::queue<std::string> args)
 {
     try {
-        inter::Parsing parsing(args);
+        std::vector<inter::Astre> astres;
+        inter::Astre rock;
+        inter::Parsing parsing(args, astres, rock);
         if (parsing.isHelp())
             return "HELP";
         parsing.run();
