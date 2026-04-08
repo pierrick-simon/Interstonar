@@ -13,6 +13,8 @@
 inter::ParseConfigFile::ParseConfigFile(std::string file, Mode mode)
     : _filePath(file), _file(file), _mode(mode)
 {
+    if (!file.ends_with(".toml"))
+        throw WrongExtensionException(file);
     if (!_file.is_open())
         throw NoSuchFileException(file);
 
@@ -128,27 +130,43 @@ std::optional<inter::Command> inter::ParseConfigFile::getCommand(
     return value;
 }
 
+bool inter::ParseConfigFile::startWriting(std::reference_wrapper<Astre> astre,
+    std::reference_wrapper<bool> writing, std::string line)
+{
+    bool value = false;
+
+    if (!writing.get()) {
+        if (line.starts_with("[[body]]")) {
+            astre.get() = Astre();
+            writing.get() = true;
+            value = true;
+        } else
+            throw ParseFileWrongArgsException(_filePath, _line);
+    }
+    return value;
+}
+
 void inter::ParseConfigFile::checkCommand(Order order, std::string line)
 {
     static auto iter = order.begin();
-    static bool writting = false;
-    Astre astre;
+    static bool writing = false;
+    static Astre astre;
+    bool skip = false;
 
-    if (!writting && line.starts_with("[[body]]")) {
-        astre = Astre();
-        writting = true;
-        return;
-    }
     try {
+        if (startWriting(astre, writing, line))
+            return;
         auto command = getCommand(iter, order, line);
         iter++;
         if (command.has_value())
             command.value()(line, astre);
-        else
-            return checkCommand(order, line);
-        if (iter == order.end()) {
+        else {
+            checkCommand(order, line);
+            skip = true;
+        }
+        if (!skip && iter == order.end()) {
             _astres.push_back(astre);
-            writting = false;
+            writing = false;
             iter = order.begin();
         }
     } catch (ParseFileException &e) {

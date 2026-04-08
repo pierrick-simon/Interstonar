@@ -15,11 +15,6 @@ namespace inter {
             Vector3D(double x, double y, double z)
                 : _x(x), _y(y), _z(z) {};
 
-            double x() const {return _x;}
-            double y() const {return _y;}
-            double z() const {return _z;}
-
-        private:
             double _x;
             double _y;
             double _z;

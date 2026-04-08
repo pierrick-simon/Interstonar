@@ -40,6 +40,12 @@ namespace inter {
                 : ParsingException(str + ": No Such File.") {};
     };
 
+    class WrongExtensionException : public ParsingException {
+        public:
+            WrongExtensionException(std::string str)
+                : ParsingException(str + ": Wrong Extension.") {};
+    };
+
     class NotANumberException : public ParsingException {
         public:
             NotANumberException(std::string str)
@@ -57,7 +63,7 @@ namespace inter {
     class ParseFileNotANumberException : public ParseFileException {
         public:
             ParseFileNotANumberException(std::string path, std::size_t line)
-                : ParseFileException("Not a number.", path, line) {};
+                : ParseFileException("Not a Number.", path, line) {};
     };
 
     class ParseFileNotAVectorException : public ParseFileException {

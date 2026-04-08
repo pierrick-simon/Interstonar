@@ -21,7 +21,7 @@ namespace inter {
     constexpr std::string_view HELP = "public/help.txt";
     constexpr std::string_view HELPFLAG = "--help";
 
-    constexpr std::string_view SIMPLEDELTAFLAG  = "-h";
+    constexpr std::string_view SIMPLEDELTAFLAG  = "-d";
     constexpr std::string_view DELTAFLAG  = "--delta=";
 
     constexpr double DEFAULTMASS = 1000;

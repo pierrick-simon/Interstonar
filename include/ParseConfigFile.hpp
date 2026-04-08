@@ -48,6 +48,8 @@ namespace inter {
             void removeComment(
                 std::reference_wrapper<std::string> str);
             bool customGetline(std::reference_wrapper<std::string> str);
+            bool startWriting(std::reference_wrapper<Astre>,
+                std::reference_wrapper<bool>, std::string);
             std::optional<Command> getCommand(
                 Order::iterator iter, Order order, std::string line);
             void checkCommand(Order order, std::string line);
