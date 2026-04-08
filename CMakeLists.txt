@@ -26,7 +26,8 @@ target_include_directories(interstonar PRIVATE ${HEADERS})
 find_library(CRITERION criterion REQUIRED)
 
 set(SRCS_TESTS
-    tests/tests_parsing.cpp
+    tests/testsArgsParsing.cpp
+    tests/testsFilesParsing.cpp
 )
 
 add_executable(tests_run_bin EXCLUDE_FROM_ALL ${SRCS_TESTS} ${SRCS})
