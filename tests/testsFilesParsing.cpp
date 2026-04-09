@@ -97,7 +97,7 @@ Test(SubjectParsingFileTest, global_scene_example)
 Test(SubjectParsingFileTest, infinite_cylinder)
 {
     std::vector<inter::Astre> astres;
-    astres.push_back(initAstre("",
+    astres.push_back(initAstre("CYLINDER_1",
         inter::Vector3D(0, 0, 12),
         inter::Vector3D(0, 0, 0),
         0,
@@ -115,13 +115,13 @@ Test(SubjectParsingFileTest, local_scene_example)
         0,
         std::make_unique<inter::TypeSphere>(1)
     ));
-    astres.push_back(initAstre("",
+    astres.push_back(initAstre("CYLINDER_1",
         inter::Vector3D(0, 0, 0),
         inter::Vector3D(0, 0, 0),
         0,
         std::make_unique<inter::TypeCylinder>(1, 100)
     ));
-    astres.push_back(initAstre("",
+    astres.push_back(initAstre("BOX_1",
         inter::Vector3D(0, 0, 0),
         inter::Vector3D(0, 0, 0),
         0,

@@ -5,6 +5,7 @@
 ** ParsingConfigFileCommands
 */
 
+#include <algorithm>
 #include "ParseConfigFile.hpp"
 #include "InterException.hpp"
 #include "TypeSphere.hpp"
@@ -69,6 +70,12 @@ void inter::ParseConfigFile::type(
         if (func == _types.end())
             throw ParseFileUnknowTypeException(_filePath, _line);
         astre.get().setType(func->second());
+        _astreTypes.push_back(type);
+        if (astre.get().getName().empty()) {
+            auto count = std::count(_astreTypes.begin(), _astreTypes.end(), type);
+            std::transform(type.begin(), type.end(), type.begin(), ::toupper);
+            astre.get().setName(type + "_" + std::to_string(count));
+        }
     } catch (ParseFileException &e) {
         throw e;
     }

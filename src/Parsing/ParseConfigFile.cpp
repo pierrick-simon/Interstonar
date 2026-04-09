@@ -10,7 +10,8 @@
 #include "ParseConfigFile.hpp"
 #include "InterException.hpp"
 
-inter::ParseConfigFile::ParseConfigFile(std::string file, Mode mode, std::reference_wrapper<std::vector<Astre>> astres)
+inter::ParseConfigFile::ParseConfigFile(std::string file, Mode mode,
+    std::reference_wrapper<std::vector<Astre>> astres)
     : _filePath(file), _file(file), _mode(mode), _astres(astres)
 {
     if (!file.ends_with(".toml"))

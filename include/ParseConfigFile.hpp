@@ -30,7 +30,7 @@ namespace inter {
     class ParseConfigFile {
         public:
             ParseConfigFile(std::string file, Mode mode,
-                std::reference_wrapper<std::vector<Astre>>);
+                std::reference_wrapper<std::vector<Astre>> astres);
             ~ParseConfigFile() {};
 
             void run();
@@ -46,6 +46,8 @@ namespace inter {
             Mode _mode;
             std::size_t _line = 0;
             std::reference_wrapper<std::vector<Astre>> _astres;
+            std::size_t _idx;
+            std::vector<std::string> _astreTypes;
 
             void removeComment(
                 std::reference_wrapper<std::string> str);
