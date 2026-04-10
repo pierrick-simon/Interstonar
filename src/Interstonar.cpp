@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <cmath>
 #include "Interstonar.hpp"
 #include "InterException.hpp"
 #include "Parsing.hpp"
@@ -53,6 +54,37 @@ void inter::Interstonar::runGlobal()
     std::cout << "Mission failure" << std::endl;
 }
 
+std::pair<double, std::string> inter::Interstonar::getShortestDist()
+{
+    std::pair<double, std::string> shortestDist;
+
+    for (auto &astre: _astres) {
+        auto dist = astre.getShortestDist(_rock.getPos());
+        if (shortestDist.second.empty() || dist < shortestDist.first)
+            shortestDist = {dist, astre.getName()};
+    }
+    return shortestDist;
+}
+
+bool inter::Interstonar::isEndLocal(
+    std::pair<double, std::string> shortestDist)
+{
+    bool value = false;
+
+    if (shortestDist.first <= 0.1) {
+        std::cout << std::endl;
+        std::cout << "Result: Intersection with " << shortestDist.second
+            << std::endl;
+        value = true;
+    }
+    if (shortestDist.first > OUTOFSCENE) {
+        std::cout << std::endl;
+        std::cout << "Result: Out of scene" << std::endl;
+        value = true;
+    }
+    return value;
+}
+
 void inter::Interstonar::runLocal()
 {
     printRock();
@@ -60,9 +92,13 @@ void inter::Interstonar::runLocal()
         astre.print();
     std::cout << std::endl;
     for (std::size_t i = 1; i <= NBSTEP; i++) {
+        auto shortestDist = getShortestDist();
+        _rock.move(shortestDist.first);
         std::cout << "Step " << i << ": ";
         _rock.getPos().printVector(2, ", ");
         std::cout << std::endl;
+        if (isEndLocal(shortestDist))
+            return;
     }
     std::cout << std::endl;
     std::cout << "Result: Steps limit reached" << std::endl;
