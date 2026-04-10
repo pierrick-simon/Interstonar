@@ -1,0 +1,17 @@
+Rock thrown at the point (10.00, 0.00, 35.00) and parallel to the vector (-1.00, 0.00, -2.00)
+Sphere of radius 1.00 at position (0.00, 0.00, 0.00)
+Cylinder of radius 1.00 and height 100.00 at position (0.00, 0.00, 0.00)
+Box of dimensions (10.00, 10.00, 10.00) at position (0.00, 0.00, 0.00)
+Torus of inner radius 3.00 and outer radius 1.00 at position (0.00, 0.00, 0.00)
+
+Step 1: (5.98, 0.00, 26.95)
+Step 2: (3.75, 0.00, 22.50)
+Step 3: (2.52, 0.00, 20.04)
+Step 4: (1.84, 0.00, 18.68)
+Step 5: (1.46, 0.00, 17.93)
+Step 6: (1.26, 0.00, 17.51)
+Step 7: (1.14, 0.00, 17.28)
+Step 8: (1.08, 0.00, 17.16)
+Step 9: (1.04, 0.00, 17.09)
+
+Result: Intersection with CYLINDER_1

@@ -15,7 +15,7 @@ void inter::TypeCylinder::print()
     std::cout << "Cylinder of radius "
         << std::fixed << std::setprecision(2) << _radius << " and ";
     if (_inf)
-        std::cout << "infinite heigh";
+        std::cout << "infinite height";
     else
         std::cout << "height "
             << std::fixed << std::setprecision(2) << _height;
