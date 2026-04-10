@@ -19,7 +19,7 @@ inter::Interstonar::Interstonar(std::queue<std::string> args)
         _time = parsing.getTime();
         _mode = parsing.getMod();
     } catch (inter::InterException &e) {
-        throw &e;
+        throw e;
     }
     _runs[Mode::Global] = [this]() {runGlobal();};
     _runs[Mode::Local] = [this]() {runLocal();};
