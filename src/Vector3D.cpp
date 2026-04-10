@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <locale>
+#include <cmath>
 #include "Vector3D.hpp"
 
 void inter::Vector3D::printVector()
@@ -36,4 +37,22 @@ void inter::Vector3D::printVector(std::size_t precision, std::string sep,
         << sep << std::fixed << std::setprecision(precision) << _z
         << ")";
     std::cout.imbue(prevLocale);
+}
+
+double inter::Vector3D::getNorm(Vector3D vec)
+{
+
+    auto mul = vec - (*this);
+
+    mul = mul * mul;
+    return sqrt(mul._x + mul._y + mul._z);
+}
+
+double inter::Vector3D::getNormalize()
+{
+
+    auto mul = (*this);
+
+    mul = mul * mul;
+    return sqrt(mul._x + mul._y + mul._z);
 }

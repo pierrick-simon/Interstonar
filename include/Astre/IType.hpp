@@ -25,6 +25,7 @@ namespace inter {
             ~IType() = default;
 
             virtual bool isCollide(Vector3D) = 0;
+            virtual double sdfFunc(Vector3D point, Vector3D pos) = 0;
             virtual void print() = 0;
     };
 }
