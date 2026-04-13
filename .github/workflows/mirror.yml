@@ -34,9 +34,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: '0'
-      - name: CMake
-        timeout-minutes: 2
-        run: cmake . .
       - name: Make
         timeout-minutes: 5
         run: make
@@ -59,9 +56,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: '0'
-      - name: CMake
-        timeout-minutes: 2
-        run: cmake . .
       - name: Make Test
         timeout-minutes: 5
         run: make tests_run
