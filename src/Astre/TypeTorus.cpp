@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 #include "TypeTorus.hpp"
 
 void inter::TypeTorus::print()
@@ -15,4 +16,14 @@ void inter::TypeTorus::print()
         << std::fixed << std::setprecision(2) << _innerRadius
         <<  " and outer radius "
         << std::fixed << std::setprecision(2) << _outerRadius;
+}
+
+double inter::TypeTorus::sdfFunc(Vector3D point, Vector3D pos)
+{
+    auto diff = point - pos;
+    diff = diff * diff;
+    double H  = sqrt(diff._x + diff._y);
+    double HC = H - _outerRadius;
+
+    return sqrt(diff._z + HC * HC) - _innerRadius;
 }

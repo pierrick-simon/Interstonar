@@ -24,3 +24,15 @@ void inter::Astre::reset()
     _mass = double();
     _type.reset();
 }
+
+void inter::Astre::move(double dist)
+{
+    auto normalize = _velocity.getNormalize();
+
+    if (normalize == 0)
+        return;
+    auto x = _pos._x + dist * _velocity._x / normalize;
+    auto y = _pos._y + dist * _velocity._y / normalize;
+    auto z = _pos._z + dist * _velocity._z / normalize;
+    _pos = {x, y, z};
+}

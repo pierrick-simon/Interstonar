@@ -18,6 +18,7 @@ namespace inter {
             ~TypeTorus() {};
 
             bool isCollide(Vector3D vec) override {return false;}
+            double sdfFunc(Vector3D point, Vector3D pos) override;
             void print() override;
 
         private:

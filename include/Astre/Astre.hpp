@@ -35,9 +35,12 @@ namespace inter {
             Vector3D getVelocity() {return _velocity;}
             double getMass() {return _mass;}
             std::string getName() {return _name;}
+            double getShortestDist(Vector3D point)
+                {return _type->sdfFunc(point, _pos);}
 
             void print();
             void reset();
+            void move(double dist);
 
         private:
             std::string _name;

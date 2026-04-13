@@ -21,6 +21,7 @@ constexpr int SKIP = -1;
 namespace inter {
 
     constexpr std::size_t NBSTEP = 1000;
+    constexpr double OUTOFSCENE = 1000.0;
 
     enum class Mode {
         Global,
@@ -38,6 +39,8 @@ namespace inter {
             void runLocal();
 
             void printRock();
+            std::pair<double, std::string> getShortestDist();
+            bool isEndLocal(std::pair<double, std::string>);
 
         private:
             std::vector<Astre> _astres;

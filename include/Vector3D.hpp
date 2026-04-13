@@ -8,6 +8,8 @@
 #ifndef VECTOR3D_HPP
 #define VECTOR3D_HPP
 
+#include <functional>
+
 namespace inter {
     class Vector3D {
         public:
@@ -23,6 +25,14 @@ namespace inter {
             void printVector(std::size_t precision, std::string sep);
             void printVector(std::size_t precision, std::string sep,
                 std::string local);
+            
+            double getNorm(Vector3D);
+            double getNormalize();
+
+            Vector3D operator*(Vector3D vec)
+                {return {_x * vec._x, _y * vec._y, _z * vec._z};}
+            Vector3D operator-(Vector3D vec)
+                {return {_x - vec._x, _y - vec._y, _z - vec._z};}
     };
 }
 
