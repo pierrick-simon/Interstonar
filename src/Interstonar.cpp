@@ -45,7 +45,7 @@ void inter::Interstonar::run()
 void inter::Interstonar::runGlobal()
 {
     std::cout << "Rock coordinates (x y z) are:" << std::endl;
-    for (std::size_t i = 1; i <= NBSTEP; i++) {
+    for (std::size_t i = 0; i <= NBSTEP; i++) {
         std::cout << "t = " << i << ": ";
         _rock.getPos().printVector(0, " ", "");
         std::cout << std::endl;
