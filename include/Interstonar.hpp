@@ -39,15 +39,22 @@ namespace inter {
             void runLocal();
 
             void printRock();
-            std::pair<double, std::string> getShortestDist();
-            bool isEndLocal(std::pair<double, std::string>);
 
         private:
             std::vector<Astre> _astres;
+            std::vector<Astre> _astres_after;
             Astre _rock;
+            Astre _rock_after;
             Mode _mode;
             std::size_t _time;
             std::unordered_map<Mode, std::function<void()>> _runs;
+
+            std::pair<double, std::string> getShortestDist();
+            bool isEndLocal(std::pair<double, std::string>);
+
+            bool computeGlobal();
+            void computeAstre(Astre &);
+            static double getVelocity(const Astre &, const Astre &);
     };
 }
 

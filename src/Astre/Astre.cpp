@@ -36,3 +36,24 @@ void inter::Astre::move(double dist)
     auto z = _pos._z + dist * _velocity._z / normalize;
     _pos = {x, y, z};
 }
+
+inter::Vector3D inter::Astre::getForce(const Astre &astre) const
+{
+    double n = this->getPos().getNorm(astre.getPos());
+    if (n == 0)
+        return Vector3D();
+    Vector3D f = Vector3D(this->getPos(), astre.getPos()) *
+        ((G * this->getMass() * astre.getMass()) / ( n * n * n));
+    return f;
+}
+
+void inter::Astre::applyForce(const Vector3D &force, const std::size_t &dt)
+{
+    Vector3D a = force / this->getMass();
+    Vector3D v = getVelocity();
+    Vector3D vAfter = v + (a * dt);
+    Vector3D posAfter = getPos() + (v * dt);
+
+    setPos(posAfter);
+    setVelocity(vAfter);
+}

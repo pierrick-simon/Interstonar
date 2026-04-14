@@ -5,7 +5,7 @@
 ## root makefile
 ##
 
-CC = clang++
+CXX = clang++
 
 MAIN = src/Main.cpp
 
@@ -46,15 +46,15 @@ NAME = interstonar
 all:	$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(CPPFLAGS)
+	$(CXX) -o $(NAME) $(OBJ) $(CPPFLAGS)
 
 debug: CFLAGS += -g
 debug: fclean $(OBJ) $(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+	$(CXX) -o $(NAME) $(OBJ)
 
 $(TESTS): LDFLAGS += --coverage -lcriterion
 $(TESTS):
-	$(CC) -o $(TESTS) $(SRC) $(PATH_UNI) \
+	$(CXX) -o $(TESTS) $(SRC) $(PATH_UNI) \
 		$(LDLIBS) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS)
 	./$(TESTS)
 

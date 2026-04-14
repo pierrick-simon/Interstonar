@@ -14,6 +14,9 @@
 #include "IType.hpp"
 
 namespace inter {
+
+    constexpr double G = 6.674E-11;
+
     class Astre {
         public:
             Astre() {};
@@ -24,6 +27,8 @@ namespace inter {
 
             Astre(const Astre&) = delete;
             Astre& operator=(const Astre&) = delete;
+            bool operator==(const Astre& astre) { return &astre == this; };
+            bool operator!=(const Astre& astre) { return &astre != this; };
 
             void setPos(Vector3D pos) {_pos = pos;}
             void setVelocity(Vector3D velocity) {_velocity = velocity;}
@@ -31,16 +36,19 @@ namespace inter {
             void setType(std::unique_ptr<IType> type) {_type = std::move(type);}
             void setName(std::string name) {_name = name;}
 
-            Vector3D getPos() {return _pos;}
-            Vector3D getVelocity() {return _velocity;}
-            double getMass() {return _mass;}
-            std::string getName() {return _name;}
-            double getShortestDist(Vector3D point)
+            Vector3D getPos() const {return _pos;}
+            Vector3D getVelocity() const {return _velocity;}
+            double getMass() const {return _mass;}
+            std::string getName() const {return _name;}
+            double getShortestDist(Vector3D point) const
                 {return _type->sdfFunc(point, _pos);}
 
             void print();
             void reset();
             void move(double dist);
+
+            Vector3D getForce(const Astre &astre) const;
+            void applyForce(const Vector3D &force, const std::size_t &dt);
 
         private:
             std::string _name;
