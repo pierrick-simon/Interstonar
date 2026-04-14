@@ -52,9 +52,9 @@ namespace inter {
             std::pair<double, std::string> getShortestDist();
             bool isEndLocal(std::pair<double, std::string>);
 
-            bool computeGlobal();
+            void computeGlobal();
             void computeAstre(Astre &);
-            static double getVelocity(const Astre &, const Astre &);
+            std::string isColision();
     };
 }
 

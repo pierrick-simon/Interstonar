@@ -57,8 +57,7 @@ void inter::Interstonar::computeAstre(Astre &astre)
         _astres_after.push_back(std::move(astre));
 }
 
-
-bool inter::Interstonar::computeGlobal()
+void inter::Interstonar::computeGlobal()
 {
     computeAstre(_rock);
     for (auto &astre: _astres)
@@ -66,7 +65,15 @@ bool inter::Interstonar::computeGlobal()
     _rock = std::move(_rock_after);
     _astres_after.swap(_astres);
     _astres_after.clear();
-    return false;
+}
+
+std::string inter::Interstonar::isColision()
+{
+    auto rockPos = _rock.getPos();
+    for (auto &astre: _astres)
+        if (astre->isCollide(astre.getPos(), rockPos))
+            return astre.getName();
+    return "";
 }
 
 void inter::Interstonar::runGlobal()
@@ -76,6 +83,13 @@ void inter::Interstonar::runGlobal()
         std::cout << "t = " << i << ": ";
         _rock.getPos().printVector(0, " ", "");
         std::cout << std::endl;
+        auto astreName = isColision();
+        if (!astreName.empty()) {
+            std::cout << "Collision between rock and " << astreName << std::endl;
+            std::cout << std::endl;
+            std::cout << "Mission success" << std::endl;
+            return;
+        }
         computeGlobal();
     }
     std::cout << std::endl;

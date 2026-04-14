@@ -30,6 +30,8 @@ namespace inter {
             bool operator==(const Astre& astre) { return &astre == this; };
             bool operator!=(const Astre& astre) { return &astre != this; };
 
+            std::unique_ptr<IType> &operator->() { return _type; };
+
             void setPos(Vector3D pos) {_pos = pos;}
             void setVelocity(Vector3D velocity) {_velocity = velocity;}
             void setMass(double mass) {_mass = mass;}
