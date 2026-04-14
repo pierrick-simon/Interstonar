@@ -19,7 +19,7 @@ namespace inter {
                 : _radius(radius), _inf(true) {};
             ~TypeCylinder() {};
 
-            bool isCollide(Vector3D pos, Vector3D rockPos) override { return false; };
+            double getBounds() const override { return _radius; };
             double sdfFunc(Vector3D point, Vector3D pos) override;
             void print() override;
 

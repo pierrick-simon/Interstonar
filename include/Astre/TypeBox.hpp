@@ -16,7 +16,7 @@ namespace inter {
             TypeBox(Vector3D sides) : _sides(sides) {};
             ~TypeBox() {};
 
-            bool isCollide(Vector3D pos, Vector3D rockPos) override {return false;}
+            double getBounds() const override { return _sides.getNormalize(); };
             double sdfFunc(Vector3D point, Vector3D pos) override;
             void print() override;
 

@@ -53,6 +53,7 @@ namespace inter {
             bool isEndLocal(std::pair<double, std::string>);
 
             void computeGlobal();
+            void computeColisions();
             void computeAstre(Astre &);
             std::string isColision();
     };

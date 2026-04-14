@@ -17,7 +17,7 @@ namespace inter {
                 : _innerRadius(innerRadius), _outerRadius(outerRadius) {};
             ~TypeTorus() {};
 
-            bool isCollide(Vector3D pos, Vector3D rockPos) override {return false;}
+            double getBounds() const override { return _outerRadius; };
             double sdfFunc(Vector3D point, Vector3D pos) override;
             void print() override;
 

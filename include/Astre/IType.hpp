@@ -22,9 +22,9 @@ namespace inter {
 
     class IType {
         public:
-            ~IType() = default;
+            virtual ~IType() = default;
 
-            virtual bool isCollide(Vector3D pos, Vector3D rockPos) = 0;
+            virtual double getBounds() const = 0;
             virtual double sdfFunc(Vector3D point, Vector3D pos) = 0;
             virtual void print() = 0;
     };

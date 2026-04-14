@@ -83,10 +83,9 @@ void inter::Parsing::parseTime()
 
 void inter::Parsing::parserock()
 {
-    TypeSphere shere(DEFAULTRADIUS);
     _rock.get().setName("rock");
     _rock.get().setMass(DEFAULTMASS);
-    _rock.get().setType(std::make_unique<TypeSphere>(shere));
+    _rock.get().setType(std::make_unique<TypeSphere>(DEFAULTRADIUS));
     try {
         _rock.get().setPos({
             parseDouble(),

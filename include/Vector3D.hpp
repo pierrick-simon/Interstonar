@@ -29,7 +29,7 @@ namespace inter {
                 std::string local);
             
             double getNorm(Vector3D);
-            double getNormalize();
+            double getNormalize() const;
 
             Vector3D operator*(const Vector3D &vec)
                 {return {_x * vec._x, _y * vec._y, _z * vec._z};}

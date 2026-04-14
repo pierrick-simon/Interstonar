@@ -57,11 +57,17 @@ void inter::Interstonar::computeAstre(Astre &astre)
         _astres_after.push_back(std::move(astre));
 }
 
+void inter::Interstonar::computeColisions()
+{
+    
+}
+
 void inter::Interstonar::computeGlobal()
 {
     computeAstre(_rock);
     for (auto &astre: _astres)
         computeAstre(astre);
+    computeColisions();
     _rock = std::move(_rock_after);
     _astres_after.swap(_astres);
     _astres_after.clear();
@@ -71,7 +77,7 @@ std::string inter::Interstonar::isColision()
 {
     auto rockPos = _rock.getPos();
     for (auto &astre: _astres)
-        if (astre->isCollide(astre.getPos(), rockPos))
+        if (astre.getPos().getNorm(rockPos) <= astre->getBounds())
             return astre.getName();
     return "";
 }

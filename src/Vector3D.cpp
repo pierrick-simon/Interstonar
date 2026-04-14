@@ -48,7 +48,7 @@ double inter::Vector3D::getNorm(Vector3D vec)
     return sqrt(mul._x + mul._y + mul._z);
 }
 
-double inter::Vector3D::getNormalize()
+double inter::Vector3D::getNormalize() const
 {
 
     auto mul = (*this);
