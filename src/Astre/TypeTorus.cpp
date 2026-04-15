@@ -23,7 +23,7 @@ double inter::TypeTorus::sdfFunc(Vector3D point, Vector3D pos)
     auto diff = point - pos;
     diff = diff * diff;
     double H  = sqrt(diff._x + diff._y);
-    double HC = H - _outerRadius;
+    double HC = H - _innerRadius;
 
-    return sqrt(diff._z + HC * HC) - _innerRadius;
+    return sqrt(diff._z + HC * HC) - _outerRadius;
 }
