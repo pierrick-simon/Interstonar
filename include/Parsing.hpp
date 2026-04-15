@@ -57,7 +57,7 @@ namespace inter {
             void parseTime();
             void parserock();
             double parseDouble();
-            std::size_t getSizeT(std::string);
+            std::size_t getSizeT(std::string, bool);
     };
 }
 

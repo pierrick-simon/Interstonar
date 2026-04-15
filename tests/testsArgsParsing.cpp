@@ -129,6 +129,61 @@ Test(ParsingTest, NotANumberInit)
     cr_assert_str_eq(test_main(args), "Error: Parsing: hello: Not a number.");
 }
 
+Test(ParsingTest, TimeNotANumberInit)
+{
+    std::queue<std::string> args(std::deque<std::string>{
+    "--global",
+    "tests/example/global_scene_example.toml",
+    "-d", "hello",
+    "10", "0", "35", "-1", "0", "-2",
+    });
+    cr_assert_str_eq(test_main(args), "Error: Parsing: hello: Not a number.");
+}
+
+Test(ParsingTest, TimeNegative)
+{
+    std::queue<std::string> args(std::deque<std::string>{
+    "--global",
+    "tests/example/global_scene_example.toml",
+    "-d", "-1",
+    "10", "0", "35", "-1", "0", "-2",
+    });
+    cr_assert_str_eq(test_main(args), "Error: Parsing: -1: Not a number.");
+}
+
+Test(ParsingTest, TimeZero)
+{
+    std::queue<std::string> args(std::deque<std::string>{
+    "--global",
+    "tests/example/global_scene_example.toml",
+    "-d", "0",
+    "10", "0", "35", "-1", "0", "-2",
+    });
+    cr_assert_str_eq(test_main(args), "Error: Parsing: 0: Not a number.");
+}
+
+Test(ParsingTest, WrongExtension)
+{
+    std::queue<std::string> args(std::deque<std::string>{
+    "--global",
+    "tests/example/global_scene_example",
+    "-d", "12",
+    "10", "0", "35", "-1", "0", "-2",
+    });
+    cr_assert_str_eq(test_main(args), "Error: Parsing: tests/example/global_scene_example: Wrong Extension.");
+}
+
+Test(ParsingTest, WrongFileName)
+{
+    std::queue<std::string> args(std::deque<std::string>{
+    "--global",
+    ".toml",
+    "-d", "12",
+    "10", "0", "35", "-1", "0", "-2",
+    });
+    cr_assert_str_eq(test_main(args), "Error: Parsing: .toml: Wrong Extension.");
+}
+
 Test(ParsingTest, ExtraArgs)
 {
     std::queue<std::string> args(std::deque<std::string>{

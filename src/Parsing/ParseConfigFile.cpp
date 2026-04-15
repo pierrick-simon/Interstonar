@@ -14,7 +14,7 @@ inter::ParseConfigFile::ParseConfigFile(std::string file, Mode mode,
     std::reference_wrapper<std::vector<Astre>> astres)
     : _filePath(file), _file(file), _mode(mode), _astres(astres)
 {
-    if (!file.ends_with(".toml"))
+    if (!file.ends_with(".toml") || file.size() <= 5)
         throw WrongExtensionException(file);
     if (!_file.is_open())
         throw NoSuchFileException(file);

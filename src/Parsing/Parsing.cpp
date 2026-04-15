@@ -69,10 +69,10 @@ void inter::Parsing::parseTime()
     try {
         if (_args.front() == SIMPLEDELTAFLAG) {
             _args.pop();
-            _time = getSizeT(_args.front());
+            _time = getSizeT(_args.front(), true);
         } else if (_args.front().starts_with(DELTAFLAG)) {
             auto tmp = _args.front().substr(DELTAFLAG.size());
-            _time = getSizeT(tmp);
+            _time = getSizeT(tmp, true);
         } else 
             throw WrongArgsException();
     } catch (ParsingException &e) {
@@ -115,14 +115,16 @@ double inter::Parsing::parseDouble()
     return nb;
 }
 
-std::size_t inter::Parsing::getSizeT(std::string str)
+std::size_t inter::Parsing::getSizeT(std::string str, bool natural)
 {
     std::istringstream tmp(str);
-    std::size_t nb;
+    int nb;
     tmp >> nb;
     if (tmp.fail())
         throw NotANumberException(str);
-    return nb;
+    if (natural && nb <= 0)
+        throw NotANumberException(str);
+    return static_cast<size_t>(nb);
 }
 
 void inter::Parsing::run()
