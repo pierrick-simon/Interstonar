@@ -15,6 +15,10 @@ void inter::ParseConfigFile::name(
 {
     try {
         astre.get().setName(parseString(line));
+        for (auto &tmp: _astres.get()) {
+            if (tmp.getName() == astre.get().getName())
+                throw ParseFileSameName(_filePath, _line);
+        }
     } catch (ParseFileException &e) {
         throw e;
     }

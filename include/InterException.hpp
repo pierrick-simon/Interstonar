@@ -89,6 +89,12 @@ namespace inter {
             ParseFileWrongArgsException(std::string path, std::size_t line)
                 : ParseFileException("Wrong Args.", path, line) {};
     };
+
+    class ParseFileSameName : public ParseFileException {
+        public:
+            ParseFileSameName(std::string path, std::size_t line)
+                : ParseFileException("Same name.", path, line) {};
+    };
 }
 
 #endif
