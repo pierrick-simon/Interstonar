@@ -8,6 +8,7 @@
 #ifndef TYPECYLINDER_HPP
     #define TYPECYLINDER_HPP
 
+#include <cmath>
 #include "IType.hpp"
 
 namespace inter {
@@ -19,7 +20,7 @@ namespace inter {
                 : _radius(radius), _inf(true) {};
             ~TypeCylinder() {};
 
-            double getBounds() const override { return _radius; };
+            double getBounds() const override;
             double sdfFunc(Vector3D point, Vector3D pos) override;
             void print() override;
 

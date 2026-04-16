@@ -39,7 +39,7 @@ void inter::Vector3D::printVector(std::size_t precision, std::string sep,
     std::cout.imbue(prevLocale);
 }
 
-double inter::Vector3D::getNorm(Vector3D vec)
+double inter::Vector3D::getNorm(Vector3D vec) const
 {
 
     auto mul = vec - (*this);

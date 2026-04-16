@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <cmath>
+#include <algorithm>
+#include <bits/stdc++.h>
 #include "Interstonar.hpp"
 #include "InterException.hpp"
 #include "Parsing.hpp"

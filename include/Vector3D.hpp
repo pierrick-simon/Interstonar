@@ -28,7 +28,7 @@ namespace inter {
             void printVector(std::size_t precision, std::string sep,
                 std::string local);
             
-            double getNorm(Vector3D);
+            double getNorm(Vector3D) const;
             double getNormalize() const;
 
             Vector3D operator*(const Vector3D &vec)

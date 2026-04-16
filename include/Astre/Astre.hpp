@@ -30,6 +30,7 @@ namespace inter {
             bool operator==(const Astre& astre) { return &astre == this; };
             bool operator!=(const Astre& astre) { return &astre != this; };
 
+            const std::unique_ptr<IType> &operator->() const { return _type; };
             std::unique_ptr<IType> &operator->() { return _type; };
 
             void setPos(Vector3D pos) {_pos = pos;}
@@ -51,6 +52,7 @@ namespace inter {
 
             Vector3D getForce(const Astre &astre) const;
             void applyForce(const Vector3D &force, const std::size_t &dt);
+            double getBounds() const { return _type->getBounds(); }
 
         private:
             std::string _name;

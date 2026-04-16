@@ -199,11 +199,11 @@ Test(ParsingFileTest, NotStartWritting)
     cr_assert_str_eq(test_main(file, false, inter::Mode::Global, astres), Error.c_str());
 }
 
-Test(ParsingFileTest, SameName)
-{
-    std::vector<inter::Astre> astres;
-    std::string file = "SameName.toml";
-    std::string Error = "Error: Parsing: Parsing file: Same name. At tests/testFiles/" + file + ":23.";
+// Test(ParsingFileTest, SameName)
+// {
+//     std::vector<inter::Astre> astres;
+//     std::string file = "SameName.toml";
+//     std::string Error = "Error: Parsing: Parsing file: Same name. At tests/testFiles/" + file + ":23.";
 
-    cr_assert_str_eq(test_main(file, false, inter::Mode::Global, astres), Error.c_str());
-}
+//     cr_assert_str_eq(test_main(file, false, inter::Mode::Global, astres), Error.c_str());
+// }

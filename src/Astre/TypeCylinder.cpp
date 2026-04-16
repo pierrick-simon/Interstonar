@@ -39,3 +39,10 @@ double inter::TypeCylinder::sdfFunc(Vector3D point, Vector3D pos)
     }
     return dist;
 }
+
+double inter::TypeCylinder::getBounds() const
+{
+    if (_inf)
+        return std::numeric_limits<double>::max();
+    return std::sqrt(_radius * _radius + (_height / 2.0) * (_height / 2.0));
+}

@@ -17,7 +17,7 @@ namespace inter {
                 : _innerRadius(innerRadius), _outerRadius(outerRadius) {};
             ~TypeTorus() {};
 
-            double getBounds() const override { return _outerRadius; };
+            double getBounds() const override { return _innerRadius + _outerRadius; }
             double sdfFunc(Vector3D point, Vector3D pos) override;
             void print() override;
 
