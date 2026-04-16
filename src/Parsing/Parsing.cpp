@@ -109,7 +109,7 @@ double inter::Parsing::parseDouble()
     std::istringstream tmp(_args.front());
     double nb;
     tmp >> nb;
-    if (tmp.fail())
+    if (tmp.fail() || !tmp.eof())
         throw NotANumberException(_args.front());
     _args.pop();
     return nb;
@@ -120,7 +120,7 @@ std::size_t inter::Parsing::getSizeT(std::string str, bool natural)
     std::istringstream tmp(str);
     int nb;
     tmp >> nb;
-    if (tmp.fail())
+    if (tmp.fail() || !tmp.eof())
         throw NotANumberException(str);
     if (natural && nb <= 0)
         throw NotANumberException(str);
