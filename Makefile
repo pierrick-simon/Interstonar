@@ -31,6 +31,7 @@ PATH_UNI = 	$(addprefix tests/, 				\
 				testsArgsParsing.cpp			\
 				testsFilesParsing.cpp			\
 				testsLocalMode.cpp				\
+				testsGlobalMode.cpp				\
 			)
 
 OBJ = $(SRC:.cpp=.o) $(MAIN:.cpp=.o)
